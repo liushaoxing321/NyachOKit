@@ -1,0 +1,6 @@
+os: osx
+osx_image : xcode8
+compiler: clang
+sudo: required
+script: 'brew install cmake ninja || true&& mkdir Build && cd Build && cmake -G "Ninja" ../ && ninja && ninja test'
+language: cpp

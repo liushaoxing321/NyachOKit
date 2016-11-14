@@ -1,13 +1,13 @@
-#ifndef NYACHOTHIN_H
-#define NYACHOTHIN_H
+#ifndef NYACHOFAT_H
+#define NYACHOFAT_H
 
 #ifdef __APPLE__
 #import <mach-o/fat.h>
 #import <mach-o/loader.h>
 #else
 #error "OS X Only For Now"
-
 #endif
+
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -15,15 +15,22 @@
 #include <typeinfo>
 #include <stdexcept>
 #include <exception>
+#include <vector>
+
+
+#include "NyachOThin.hpp"
+#include "EndianUtils.hpp"
 using namespace std;
-class NyachOThin {
+class NyachOFat {
 	private:
 		std::ifstream & inputStream;
-		struct mach_header* Header;
-	//protected:
+		struct fat_header* Header;
+	protected:
+		vector<NyachOThin> sliceList;
+		bool shouldSwap=false;//Swap Endian if needed
 
 	public:
-		NyachOThin(std::ifstream & rawData);
+		NyachOFat(std::ifstream & rawData);
 		std::string dump();
 } ;
 

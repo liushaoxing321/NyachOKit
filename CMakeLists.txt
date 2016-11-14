@@ -1,8 +1,16 @@
-cmake_minimum_required (VERSION 2.8)
+cmake_minimum_required (VERSION 3.5)
 project (NyachO)
 enable_testing()
 set(CMAKE_DISABLE_SOURCE_CHANGES ON)
 set(CMAKE_DISABLE_IN_SOURCE_BUILD ON)
+
+include (TestBigEndian)
+TEST_BIG_ENDIAN(IS_BIG_ENDIAN)
+if(IS_BIG_ENDIAN)
+ add_definitions(-DBIGENDIAN=1)
+else()
+ add_definitions(-DLITTLEENDIAN=1)
+endif()
 
 if(UNIX)
 	#Microsoft managed to think different again. Congratulations! /s

@@ -1,12 +1,20 @@
-#include "Note.hpp"
-#include "Section.hpp"
+#include "NyachOThin.hpp"
+#include "NyachOFat.hpp"
 #include <iostream>
 int main(int argc, char *argv[], char *envp[]) {
-	float location[2] = { 12,12 };
-	std::list<Section> listSec;
-	Section sect = Section::Section(12.0, 12.0);
-	listSec.push_back(sect);
-	Note NT = Note::Note(location, listSec);
-	std::cout << NT.Serialize().dump();
+	/*std::ifstream OSXmachO;
+	OSXmachO.open("/Applications/Launchpad.app/Contents/MacOS/Launchpad",ios_base::binary);
+	NyachOThin OSXnya=NyachOThin::NyachOThin(OSXmachO);
+	std::cout<<OSXnya.dump();
+
+	std::ifstream iOSmachO;
+	iOSmachO.open("/Users/Naville/iOSMachO",ios_base::binary);
+	NyachOThin iOSnya=NyachOThin::NyachOThin(iOSmachO);
+	std::cout<<iOSnya.dump();*/
+	std::ifstream iOSFatMachO;
+	iOSFatMachO.open("/Users/Naville/iOSFatMachO",ios_base::binary);
+	NyachOFat iOSFatnya=NyachOFat::NyachOFat(iOSFatMachO);
+	std::cout<<iOSFatnya.dump();
+
 	return 0;
 }

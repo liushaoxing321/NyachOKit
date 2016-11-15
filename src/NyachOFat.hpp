@@ -27,7 +27,7 @@ class NyachOFat {
 		std::ifstream & inputStream;
 		NyachOFatHeader* Header;
 	protected:
-		vector<NyachOThin> sliceList;
+		vector<NyachOThin*> sliceList;
 		bool shouldSwap=false;//Swap Endian if needed
 
 	public:

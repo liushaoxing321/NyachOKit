@@ -23,12 +23,10 @@ using namespace std;
 class NyachOThin {
 	private:
 		NyachOMachHeader* Header;
-	protected:
-		bool shouldSwap=false;//Swap Endian if needed
-
 	public:
 		NyachOThin(char* loc,unsigned long long size);
 		std::string dump();
+        bool shouldSwap=false;//Swap Endian if needed
 } ;
 
 #endif

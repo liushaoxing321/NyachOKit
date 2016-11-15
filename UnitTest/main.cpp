@@ -12,7 +12,7 @@ int main(int argc, char *argv[], char *envp[]) {
 	NyachOThin iOSnya=NyachOThin::NyachOThin(iOSmachO);
 	std::cout<<iOSnya.dump();*/
 	std::ifstream FatMachO;
-	FatMachO.open("/Users/Naville/NyachoTest",ios_base::binary);
+	FatMachO.open("/Users/Naville/NyachOiOSTest.dylib",ios_base::binary);
 	NyachOFat Fatnya=NyachOFat::NyachOFat(FatMachO);
 	std::cout<<Fatnya.dump();
     

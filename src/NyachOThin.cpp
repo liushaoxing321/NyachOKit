@@ -10,7 +10,7 @@ NyachOThin::NyachOThin(char* loc,unsigned long long size){
 
 string NyachOThin::dump(){
 	stringstream ss;
-	ss<<"Thin Mach-O "<<this->Header->dump()<<endl;
+	ss<<this->Header->dump()<<endl;
 	return ss.str();
 
 }

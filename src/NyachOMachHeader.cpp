@@ -1,21 +1,30 @@
 #include "NyachOMachHeader.hpp"
+
+
+#define UpdateThisFromHeader(Header) \
+    this->magic=Header->magic;\
+    this->cputype=Header->cputype;\
+    this->cpusubtype=Header->cpusubtype;\
+    this->filetype=Header->filetype;\
+    this->sizeofcmds=Header->sizeofcmds;\
+    this->flags=Header->flags;\
+
+
+
+
 NyachOMachHeader::NyachOMachHeader(char* loc){
-    this->Header=*(struct mach_header_64*)loc;
+    struct mach_header* ArchJudgingheader=(struct mach_header*)loc;
     this->is64=false;
-    switch(Header.magic){
+    switch(ArchJudgingheader->magic){
         case MH_MAGIC:
-            std::cout<<"MH_MAGIC\n";
             break;
         case MH_CIGAM:
-            std::cout<<"MH_CIGAM\n";
             this->shouldSwap=true;
             break;
         case MH_MAGIC_64:
-            std::cout<<"MH_MAGIC_64\n";
             this->is64=true;
             break;
         case MH_CIGAM_64:
-            std::cout<<"MH_CIGAM_64\n";
             this->is64=true;
             this->shouldSwap=true;
             break;
@@ -24,15 +33,41 @@ NyachOMachHeader::NyachOMachHeader(char* loc){
     }
     if(this->shouldSwap){
         if(this->is64){
-            SwapMach64Header(&Header);
+            struct mach_header_64* Header=(struct mach_header_64 *)loc;
+            SwapMach64Header(Header);
+            UpdateThisFromHeader(Header);
+            this->reserved=Header->reserved;
         }
         else{
-            SwapMachHeader((struct mach_header *)&this->Header);
+            struct mach_header* Header=(struct mach_header *)loc;
+            SwapMachHeader(Header);
+            UpdateThisFromHeader(Header);
         }
     }
+    else{
+        if(this->is64){
+            struct mach_header_64* Header=(struct mach_header_64 *)loc;
+            UpdateThisFromHeader(Header);
+            this->reserved=Header->reserved;
+        }
+        else{
+            struct mach_header* Header=(struct mach_header *)loc;
+            UpdateThisFromHeader(Header);
+        }
+        
+    }
 
+    
+    
 }
 string NyachOMachHeader::dump(){
-    
-  return "Mach-O Header";
+    stringstream ss;
+    ss<<"Thin MachO Header:\n";
+    ss<<"magic:0x"<<std::hex<<this->magic<<endl;
+    ss<<"cputype:0x"<<std::hex<<this->cputype<<endl;
+    ss<<"cpusubtype:0x"<<std::hex<<this->cpusubtype<<endl;
+    ss<<"filetype:0x"<<std::hex<<this->filetype<<endl;
+    ss<<"sizeofcmds:0x"<<std::hex<<this->sizeofcmds<<endl;
+    ss<<"flags:0x"<<std::hex<<this->flags<<endl;
+    return ss.str();
 }

@@ -23,7 +23,8 @@ class NyachOFatHeader {
 	public:
 		NyachOFatHeader(char* loc);
 		std::string dump();
-        struct fat_header Header={0};
+        uint32_t	magic;		/* FAT_MAGIC or FAT_MAGIC_64 */
+        uint32_t	nfat_arch;
         bool is64;
         bool shouldSwap=false;//Swap Endian if needed
     

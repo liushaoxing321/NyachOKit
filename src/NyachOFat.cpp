@@ -5,7 +5,7 @@ NyachOFat::NyachOFat(std::ifstream & rawData):inputStream(rawData){
     rawData.read (buffer,sizeof(struct fat_header));
     
     this->Header=new NyachOFatHeader(buffer);
-    for(int i =0;i<this->Header->Header.nfat_arch;i++){
+    for(int i =0;i<this->Header->nfat_arch;i++){
         int currentPosition=rawData.tellg();
         if(this->Header->is64){
             struct fat_arch_64* fh=(struct fat_arch_64*)new char [sizeof(struct fat_arch_64)];
@@ -18,7 +18,7 @@ NyachOFat::NyachOFat(std::ifstream & rawData):inputStream(rawData){
             rawData.read(archData, fh->size);
             
             NyachOThin* currentArch=new NyachOThin(archData,fh->size);
-            
+            this->sliceList.push_back(currentArch);
             delete[] fh;
             rawData.seekg(currentPosition+sizeof(fat_arch_64));
             
@@ -34,7 +34,7 @@ NyachOFat::NyachOFat(std::ifstream & rawData):inputStream(rawData){
             rawData.read(archData, fh->size);
             
             NyachOThin* currentArch=new NyachOThin(archData,fh->size);
-            
+            this->sliceList.push_back(currentArch);
             delete[] fh;
             rawData.seekg(currentPosition+sizeof(fat_arch));;
         }
@@ -45,7 +45,11 @@ NyachOFat::NyachOFat(std::ifstream & rawData):inputStream(rawData){
 
 string NyachOFat::dump(){
 	stringstream ss;
-    ss<<this->Header->dump();
+    ss<<this->Header->dump()<<endl;
+    ss<<"Thin Mach-O Header:"<<endl;
+    for(int i =0;i<this->sliceList.size();i++){
+        ss<<sliceList.at(i)->dump()<<endl;
+    }
     return ss.str();
 
 }

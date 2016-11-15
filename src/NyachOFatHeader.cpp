@@ -1,21 +1,17 @@
 #import "NyachOFatHeader.hpp"
 NyachOFatHeader::NyachOFatHeader(char* loc){
-    Header=*(struct fat_header*)loc;
+    struct fat_header* Header=(struct fat_header*)loc;
     this->is64=false;
-    switch(Header.magic){
+    switch(Header->magic){
         case FAT_MAGIC:
-            std::cout<<"FAT_MAGIC\n";
             break;
         case FAT_CIGAM:
-            std::cout<<"FAT_CIGAM\n";
            this->shouldSwap=true;
             break;
         case FAT_MAGIC_64:
-            std::cout<<"FAT_MAGIC_64\n";
             this->is64=true;
             break;
         case FAT_CIGAM_64:
-            std::cout<<"FAT_CIGAM_64\n";
             this->is64=true;
             this->shouldSwap=true;
             break;
@@ -23,13 +19,17 @@ NyachOFatHeader::NyachOFatHeader(char* loc){
             throw std::invalid_argument( "Not a Fat Mach-O Executable\n" );
     }
     if(this->shouldSwap){
-        SwapFatHeader(&this->Header);
+        SwapFatHeader(Header);
     }
+    this->magic=Header->magic;
+    this->nfat_arch=Header->nfat_arch;
     
 }
 
 string NyachOFatHeader::dump(){
     stringstream ss;
-    ss<<"Fat Mach-O Header nfat_arch:"<<this->Header.nfat_arch<<endl;
+    ss<<"Fat MachO Header:\n";
+    ss<<"magic:0x"<<std::hex<<this->magic<<endl;
+    ss<<"nfat_arch:0x"<<std::hex<<this->nfat_arch<<endl;
     return ss.str();
 }

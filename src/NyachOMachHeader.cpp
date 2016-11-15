@@ -7,6 +7,7 @@
     this->cpusubtype=Header->cpusubtype;\
     this->filetype=Header->filetype;\
     this->sizeofcmds=Header->sizeofcmds;\
+    this->ncmds=Header->ncmds;\
     this->flags=Header->flags;\
 
 

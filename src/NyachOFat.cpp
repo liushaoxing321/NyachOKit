@@ -1,6 +1,6 @@
 #include "NyachOFat.hpp"
 using namespace std;
-NyachOFat::NyachOFat(std::ifstream & rawData):inputStream(rawData){
+NyachOFat::NyachOFat(std::ifstream & rawData){
     char * buffer = new char [sizeof(struct fat_header)];
     rawData.read (buffer,sizeof(struct fat_header));
     

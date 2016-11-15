@@ -24,7 +24,6 @@
 using namespace std;
 class NyachOFat {
 	private:
-		std::ifstream & inputStream;
 		NyachOFatHeader* Header;
 	protected:
 		vector<NyachOThin*> sliceList;

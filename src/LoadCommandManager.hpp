@@ -33,7 +33,7 @@ class LoadCommandManager{
     protected:
         bool shouldSwap;
     public:
-        NyachOLoadCommand* ParseLC(char* LCPosition,bool Swap);
+        static NyachOLoadCommand* ParseLC(char* loc,bool shouldSwap);
     
 };
 

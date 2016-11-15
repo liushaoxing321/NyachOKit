@@ -29,7 +29,7 @@ using namespace std;
 class NyachOLoadCommand {
 public:
     NyachOLoadCommand(char* loc,bool shouldSwap=false);
-    std::string dump();
+    virtual std::string dump();
     void* commandData;//struct representing different struct load_command s. overridden by subclass
     uint32_t cmd;		/* type of load command */
     uint32_t cmdsize;	/* total size of command in bytes */

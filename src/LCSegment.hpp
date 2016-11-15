@@ -15,6 +15,7 @@ protected:
     void* LC;//Pointer to segment_command or segment_command_64
 public:
     LCSegment(char* LCPosition,bool shouldSwap);
+    string dump();
     uint32_t	cmd;		/* LC_SEGMENT_64 */
     uint32_t	cmdsize;	/* includes sizeof section_64 structs */
     char		segname[16];	/* segment name */

@@ -15,9 +15,11 @@
 #include <typeinfo>
 #include <stdexcept>
 #include <exception>
+#include <vector>
 
 #include "EndianUtils.hpp"
 #include "NyachOMachHeader.hpp"
+#include "NyachOLoadCommand.hpp"
 
 using namespace std;
 class NyachOThin {
@@ -27,6 +29,8 @@ class NyachOThin {
 		NyachOThin(char* loc,unsigned long long size);
 		std::string dump();
         bool shouldSwap=false;//Swap Endian if needed
+        vector<NyachOLoadCommand*> LCList;
+    
 } ;
 
 #endif

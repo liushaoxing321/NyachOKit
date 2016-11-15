@@ -6,6 +6,18 @@
 //
 //
 
+#define SetupThisFromLC(LC) this->cmd=LC->cmd;\
+    this->cmdsize=LC->cmdsize;\
+    memcpy(this->segname,LC->segname,16);\
+    this->vmaddr=LC->vmaddr;\
+    this->vmsize=LC->vmsize;\
+    this->fileoff=LC->fileoff;\
+    this->filesize=LC->filesize;\
+    this->maxprot=LC->maxprot;\
+    this->initprot=LC->initprot;\
+    this->nsects=LC->nsects;\
+    this->flags=LC->flags
+
 #include "LCSegment.hpp"
 LCSegment::LCSegment(char* LCPosition,bool shouldSwap):NyachOLoadCommand(LCPosition,shouldSwap){
     bool is64=false;
@@ -17,6 +29,8 @@ LCSegment::LCSegment(char* LCPosition,bool shouldSwap):NyachOLoadCommand(LCPosit
             if(shouldSwap){
                 SwapSegmentCommand(LC);
             }
+            SetupThisFromLC(LC);
+            break;
         }
         case LC_SEGMENT_64:{
             is64=true;
@@ -24,8 +38,24 @@ LCSegment::LCSegment(char* LCPosition,bool shouldSwap):NyachOLoadCommand(LCPosit
             if(shouldSwap){
                 SwapSegment64Command(LC);
             }
+            SetupThisFromLC(LC);
+            break;
         }
     default:
         throw std::invalid_argument( "This will never be executed\n" );
     }
+}
+string LCSegment::dump(){
+    stringstream ss;
+    ss<<NyachOLoadCommand::dump();
+    ss<<"segname:"<<this->segname<<endl;
+    ss<<"vmaddr:"<<this->vmaddr<<endl;
+    ss<<"vmsize:"<<this->vmsize<<endl;
+    ss<<"fileoff:"<<this->fileoff<<endl;
+    ss<<"filesize:"<<this->filesize<<endl;
+    ss<<"maxprot:"<<this->maxprot<<endl;
+    ss<<"initprot:"<<this->initprot<<endl;
+    ss<<"nsects:"<<this->nsects<<endl;
+    ss<<"flags:"<<this->flags<<endl;
+    return ss.str();
 }

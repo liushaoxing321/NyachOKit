@@ -24,7 +24,6 @@ LCEncryptionInfo::LCEncryptionInfo(char* LCPosition,bool shouldSwap):NyachOLoadC
 string LCEncryptionInfo::dump(){
     stringstream ss;
     ss<<NyachOLoadCommand::dump();
-    ss<<"cmdsize: "<<std::hex<<this->cmdsize<<endl;
     ss<<"cryptoff: "<<std::hex<<this->cryptoff<<endl;
     ss<<"cryptsize: "<<std::hex<<this->cryptsize<<endl;
     ss<<"cryptid: "<<std::hex<<this->cryptid<<endl;

@@ -18,6 +18,6 @@ NyachOLoadCommand::NyachOLoadCommand(char* loc,bool shouldSwap){
 
 string NyachOLoadCommand::dump(){
     stringstream ss;
-    ss<<"command: 0x"<<std::hex<<this->cmd<<endl<<"commandsize: 0x"<<std::hex<<this->cmdsize<<endl;
+    ss<<"cmd: 0x"<<std::hex<<this->cmd<<endl<<"cmdsize: 0x"<<std::hex<<this->cmdsize<<endl;
     return ss.str();
 }

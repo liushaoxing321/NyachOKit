@@ -48,14 +48,14 @@ LCSegment::LCSegment(char* LCPosition,bool shouldSwap):NyachOLoadCommand(LCPosit
 string LCSegment::dump(){
     stringstream ss;
     ss<<NyachOLoadCommand::dump();
-    ss<<"segname:"<<this->segname<<endl;
-    ss<<"vmaddr:"<<this->vmaddr<<endl;
-    ss<<"vmsize:"<<this->vmsize<<endl;
-    ss<<"fileoff:"<<this->fileoff<<endl;
-    ss<<"filesize:"<<this->filesize<<endl;
-    ss<<"maxprot:"<<this->maxprot<<endl;
-    ss<<"initprot:"<<this->initprot<<endl;
-    ss<<"nsects:"<<this->nsects<<endl;
-    ss<<"flags:"<<this->flags<<endl;
+    ss<<"segname: "<<this->segname<<endl;
+    ss<<"vmaddr: 0x"<<std::hex<<this->vmaddr<<endl;
+    ss<<"vmsize: 0x"<<std::hex<<this->vmsize<<endl;
+    ss<<"fileoff: 0x"<<std::hex<<this->fileoff<<endl;
+    ss<<"filesize: 0x"<<std::hex<<this->filesize<<endl;
+    ss<<"maxprot: 0x"<<std::hex<<this->maxprot<<endl;
+    ss<<"initprot: 0x"<<std::hex<<this->initprot<<endl;
+    ss<<"nsects: 0x"<<std::hex<<this->nsects<<endl;
+    ss<<"flags: 0x"<<std::hex<<this->flags<<endl;
     return ss.str();
 }

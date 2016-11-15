@@ -23,6 +23,19 @@ NyachOLoadCommand* LoadCommandManager::ParseLC(char* LCPosition,bool Swap){
         case LC_ENCRYPTION_INFO_64:
             return new LCEncryptionInfo(LCPosition,Swap);
             break;
+        case LC_ID_DYLIB:
+            return new LCDylibCommand(LCPosition,Swap);
+            break;
+        case LC_LOAD_DYLIB:
+            return new LCDylibCommand(LCPosition,Swap);
+            break;
+        
+        case LC_LOAD_WEAK_DYLIB:
+            return new LCDylibCommand(LCPosition,Swap);
+            break;
+        case LC_REEXPORT_DYLIB:
+            return new LCDylibCommand(LCPosition,Swap);
+            break;
         default:
 #warning Using BaseLC Class For Unimplemented LC Handler here.
             return new NyachOLoadCommand(LCPosition,Swap);

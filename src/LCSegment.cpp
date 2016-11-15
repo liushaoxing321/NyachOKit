@@ -26,18 +26,18 @@ LCSegment::LCSegment(char* LCPosition,bool shouldSwap):NyachOLoadCommand(LCPosit
         case LC_SEGMENT:{
             //32bit header
             struct segment_command* LC=(struct segment_command*)LCPosition;
-            if(shouldSwap){
+            /*if(shouldSwap){
                 SwapSegmentCommand(LC);
-            }
+            }*/
             SetupThisFromLC(LC);
             break;
         }
         case LC_SEGMENT_64:{
             is64=true;
             struct segment_command_64* LC=(struct segment_command_64*)LCPosition;
-            if(shouldSwap){
+            /*if(shouldSwap){
                 SwapSegment64Command(LC);
-            }
+            }*/
             SetupThisFromLC(LC);
             break;
         }

@@ -49,5 +49,8 @@ static void SwapSegmentCommand(struct segment_command * sc){
 static void SwapSegment64Command(struct segment_command_64 * sc){
 //#error Unimplemented
 }
+
+
+
 #endif
 

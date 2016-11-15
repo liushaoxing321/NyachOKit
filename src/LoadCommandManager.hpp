@@ -27,7 +27,7 @@
 #include "NyachOLoadCommand.hpp"
 #include "LCSegment.hpp"
 #include "LCEncryptionInfo.hpp"
-
+#include "LCDylibCommand.hpp"
 
 using namespace std;
 class LoadCommandManager{

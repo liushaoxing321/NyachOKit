@@ -10,18 +10,21 @@ NyachOThin::NyachOThin(char* loc,unsigned long long size){
     else{
         offset=offset+sizeof(struct mach_header);
     }
-    char* firstLCData=new char[sizeof(struct load_command)];
-    memcpy (firstLCData,loc+offset,sizeof(struct load_command));
-    
-    struct load_command* previousLC=(struct load_command*)firstLCData;
     for(int i=0;i<this->Header->ncmds;i++){
-        char* fullLC=new char[previousLC->cmdsize];
-        memcpy (fullLC,loc+offset,previousLC->cmdsize);
-        struct load_command* currentLC=(struct load_command*)fullLC;
-        NyachOLoadCommand* NYLC=LoadCommandManager::ParseLC((char*)currentLC,this->Header->shouldSwap);
-        this->LCList.push_back(NYLC);
+        //Copy out the minimum memory to determine the size of this LC
+        char* minimumData=new char[sizeof(struct load_command)];
+        memcpy(minimumData, loc+offset, sizeof(struct load_command));
+               
+        struct load_command* minimumHeader=(struct load_command*)minimumData;
+               
+        //Constructor full LC
+        char* currentLC=new char[minimumHeader->cmdsize];
+        memcpy(currentLC, loc+offset, minimumHeader->cmdsize);
         
-        offset=offset+currentLC->cmdsize; //Point offset to the second LC
+        NyachOLoadCommand* NYLC=LoadCommandManager::ParseLC(currentLC,this->Header->shouldSwap);
+        this->LCList.push_back(NYLC);
+        delete[] minimumData;
+        offset=offset+NYLC->cmdsize; //Point offset to the next LC
     }
     
     

@@ -2,5 +2,5 @@ os: osx
 osx_image : xcode8
 compiler: clang
 sudo: required
-script: 'brew update cmake ninja || true&& mkdir Build && cd Build && cmake -G "Ninja" ../ && ninja'
+script: 'brew upgrade cmake ninja || true&& mkdir Build && cd Build && cmake -G "Ninja" ../ && ninja'
 language: cpp

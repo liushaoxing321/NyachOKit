@@ -116,3 +116,7 @@
 #endif
 
 #endif
+
+
+
+#define CheckEndian (LITTLEENDIAN ==1 && !TargetisLitteEndian)||(LITTLEENDIAN==0&& TargetisLitteEndian)

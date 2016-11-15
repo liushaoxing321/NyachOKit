@@ -19,12 +19,13 @@
 
 
 #include "NyachOThin.hpp"
+#include "NyachOFatHeader.hpp"
 #include "EndianUtils.hpp"
 using namespace std;
 class NyachOFat {
 	private:
 		std::ifstream & inputStream;
-		struct fat_header* Header;
+		NyachOFatHeader* Header;
 	protected:
 		vector<NyachOThin> sliceList;
 		bool shouldSwap=false;//Swap Endian if needed

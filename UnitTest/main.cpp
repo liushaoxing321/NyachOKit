@@ -11,10 +11,10 @@ int main(int argc, char *argv[], char *envp[]) {
 	iOSmachO.open("/Users/Naville/iOSMachO",ios_base::binary);
 	NyachOThin iOSnya=NyachOThin::NyachOThin(iOSmachO);
 	std::cout<<iOSnya.dump();*/
-	std::ifstream iOSFatMachO;
-	iOSFatMachO.open("/Users/Naville/iOSFatMachO",ios_base::binary);
-	NyachOFat iOSFatnya=NyachOFat::NyachOFat(iOSFatMachO);
-	std::cout<<iOSFatnya.dump();
-
+	std::ifstream FatMachO;
+	FatMachO.open("/Users/Naville/NyachoTest",ios_base::binary);
+	NyachOFat Fatnya=NyachOFat::NyachOFat(FatMachO);
+	std::cout<<Fatnya.dump();
+    
 	return 0;
 }

@@ -1,5 +1,5 @@
-#ifndef NYACHOTHIN_H
-#define NYACHOTHIN_H
+#ifndef NYACHOFATHEADER_H
+#define NYACHOFATHEADER_H
 
 #ifdef __APPLE__
 #import <mach-o/fat.h>
@@ -17,18 +17,16 @@
 #include <exception>
 
 #include "EndianUtils.hpp"
-#include "NyachOMachHeader.hpp"
 
 using namespace std;
-class NyachOThin {
-	private:
-		NyachOMachHeader* Header;
-	protected:
-		bool shouldSwap=false;//Swap Endian if needed
-
+class NyachOFatHeader {
 	public:
-		NyachOThin(char* loc,unsigned long long size);
+		NyachOFatHeader(char* loc);
 		std::string dump();
+        struct fat_header Header={0};
+        bool is64;
+        bool shouldSwap=false;//Swap Endian if needed
+    
 } ;
 
 #endif

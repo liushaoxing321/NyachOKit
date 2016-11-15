@@ -43,14 +43,5 @@ static void SwapFatArch64(struct fat_arch_64 * fh){
     fh->align=be32toh(fh->align);
     fh->reserved=be32toh(fh->reserved);
 }
-static void SwapSegmentCommand(struct segment_command * sc){
-//#error Unimplemented
-}
-static void SwapSegment64Command(struct segment_command_64 * sc){
-//#error Unimplemented
-}
-
-
-
 #endif
 

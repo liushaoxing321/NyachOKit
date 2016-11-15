@@ -1,4 +1,4 @@
-cmake_minimum_required (VERSION 3.5)
+cmake_minimum_required (VERSION 3.0)
 project (NyachO)
 enable_testing()
 set(CMAKE_DISABLE_SOURCE_CHANGES ON)

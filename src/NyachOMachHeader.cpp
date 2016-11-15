@@ -16,22 +16,24 @@
 NyachOMachHeader::NyachOMachHeader(char* loc){
     struct mach_header* ArchJudgingheader=(struct mach_header*)loc;
     this->is64=false;
+    bool isLittleEndian=false;
     switch(ArchJudgingheader->magic){
         case MH_MAGIC:
             break;
         case MH_CIGAM:
-            this->shouldSwap=true;
+            isLittleEndian=true;
             break;
         case MH_MAGIC_64:
             this->is64=true;
             break;
         case MH_CIGAM_64:
             this->is64=true;
-            this->shouldSwap=true;
+            isLittleEndian=true;
             break;
         default:
             throw std::invalid_argument( "Not a Thin Mach-O Executable\n" );
     }
+    this->shouldSwap=isLittleEndian;
     if(this->shouldSwap){
         if(this->is64){
             struct mach_header_64* Header=(struct mach_header_64 *)loc;

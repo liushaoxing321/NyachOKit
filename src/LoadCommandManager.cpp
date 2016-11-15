@@ -17,9 +17,14 @@ NyachOLoadCommand* LoadCommandManager::ParseLC(char* LCPosition,bool Swap){
         case LC_SEGMENT_64:
             return new LCSegment(LCPosition,Swap);
             break;
-            
+        case LC_ENCRYPTION_INFO:
+            return new LCEncryptionInfo(LCPosition,Swap);
+            break;
+        case LC_ENCRYPTION_INFO_64:
+            return new LCEncryptionInfo(LCPosition,Swap);
+            break;
         default:
-#warning Using BaseLC Class here.
+#warning Using BaseLC Class For Unimplemented LC Handler here.
             return new NyachOLoadCommand(LCPosition,Swap);
             /*stringstream ss;
             ss<<"Unknown LoadCommand: "<<LC->cmd<<endl;

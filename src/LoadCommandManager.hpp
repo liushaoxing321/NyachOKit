@@ -26,6 +26,7 @@
 #include "EndianUtils.hpp"
 #include "NyachOLoadCommand.hpp"
 #include "LCSegment.hpp"
+#include "LCEncryptionInfo.hpp"
 
 
 using namespace std;

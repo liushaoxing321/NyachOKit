@@ -2,22 +2,24 @@
 NyachOFatHeader::NyachOFatHeader(char* loc){
     struct fat_header* Header=(struct fat_header*)loc;
     this->is64=false;
+    bool isLittleEndian=false;
     switch(Header->magic){
         case FAT_MAGIC:
             break;
         case FAT_CIGAM:
-           this->shouldSwap=true;
+            isLittleEndian=true;
             break;
         case FAT_MAGIC_64:
             this->is64=true;
             break;
         case FAT_CIGAM_64:
             this->is64=true;
-            this->shouldSwap=true;
+            isLittleEndian=true;
             break;
         default:
             throw std::invalid_argument( "Not a Fat Mach-O Executable\n" );
     }
+    this->shouldSwap=isLittleEndian;
     if(this->shouldSwap){
         SwapFatHeader(Header);
     }

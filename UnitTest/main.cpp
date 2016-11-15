@@ -13,6 +13,8 @@ int main(int argc, char *argv[], char *envp[]) {
 	std::cout<<iOSnya.dump();*/
 	std::ifstream FatMachO;
 	FatMachO.open("/Users/Naville/NyachOiOSTest.dylib",ios_base::binary);
+    //FatMachO.open("/Users/Naville/Desktop/Development/qqmusiclrcexporter/QQMusicPad",ios_base::binary);
+
 	NyachOFat Fatnya=NyachOFat::NyachOFat(FatMachO);
 	std::cout<<Fatnya.dump();
     
